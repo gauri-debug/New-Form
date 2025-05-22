@@ -1,0 +1,92 @@
+<html>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen" bg-black>
+<form id "registrationForm" action="https://example.com/submit" method="POST" >
+<div>
+  <title class="text-2xl font-bold text-center text-black dark:text-white">Registration Form</title>
+  <style >  
+    input#name:invalid:focus {
+      border-color: red ;
+    }
+  </style>
+  <div class="grid grid-cols-1 gap-4 @sm:grid-cols-2">
+   <label for="name" class="text-xl font-medium text-black dark:text-white ">Name</label>
+   <input type="required text" id="name" name="name" placeholder="enter full name" class="border border-gray-300 rounded-md p-2" required>
+  </div>  
+  <div class="grid grid-cols-1 gap-4 @sm:grid-cols-2">
+   <label for=" email" class="text-xl font-medium text-black dark:text-white " >Email</label>
+   <input type="email" id="email" name="email" placeholder = "enter email" class="border border-gray-300 rounded-md p-2" required>
+  </div>
+  <div class="grid grid-cols-1 gap-4 @sm:grid-cols-2">
+   <label for="password" class="text-xl font-medium text-black dark:text-white">Password</label>
+   <input type="password" id="password" name="password" placeholder = "enter password" class="border border-gray-300 rounded-md p-2" required>
+  </div>
+  <div class="grid grid-cols-1 gap-4 @sm:grid-cols-2">
+   <label for="dob" class="text-xl font-medium text-black dark:text-white">Date of Birth</label>
+   <input type="date" id="dob" name="dob" placeholder="enter date of birth" class="border border-gray-300 rounded-md p-2" required>
+  </div>  
+   <input type="checkbox" id="acceptTerms" name="acceptTerms" placeholder="accept terms" class="border border-gray-300 rounded-md p-2" required>
+   <label for="acceptTerms" >Accept Terms & Conditions</label>
+  </div>
+   <button type="submit" class="mt-6 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 " >Submit</button>
+  </div>
+</div>
+</form>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Form submitted successfully!');
+  });
+</script>
+</body>
+<!-- ...existing code... -->
+<div id="tableContainer" class="mt-8 w-full flex justify-center hidden">
+  <table id="responsesTable" class="min-w-max bg-white rounded shadow text-left">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 border">Name</th>
+        <th class="px-4 py-2 border">Email</th>
+        <th class="px-4 py-2 border">Password</th>
+        <th class="px-4 py-2 border">Date of Birth</th>
+        <th class="px-4 py-2 border">Accepted Terms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Responses will be added here -->
+    </tbody>
+  </table>
+</div>
+<script>
+  document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Get values by ID
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var dob = document.getElementById('dob').value;
+    var accepted = document.getElementById('acceptTerms').checked ? "Yes" : "No";
+    
+    //Date of Birth validation
+    var dobDate = new Date(dob);
+    var mindate = new Date('1970-01-01');
+    var maxdate = new Date('2006-12-31');
+    if (dobDate < mindate || dobDate > maxdate) {
+      alert('Date of Birth must be between 1970-01-01 and 2005-01-01');
+      return;
+    }
+    // Show the table
+    document.getElementById('tableContainer').classList.remove('hidden');
+
+    // Add a new row to the table
+    var table = document.getElementById('responsesTable').getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow();
+    newRow.innerHTML = `
+      <td class="border px-4 py-2">${name}</td>
+      <td class="border px-4 py-2">${email}</td>
+      <td class="border px-4 py-2">${password}</td>
+      <td class="border px-4 py-2">${dob}</td>
+      <td class="border px-4 py-2">${accepted}</td>
+    </tr>
+    </tbody>
+    </script
+</html>
